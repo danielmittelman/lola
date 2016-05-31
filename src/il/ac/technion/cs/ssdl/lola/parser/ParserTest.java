@@ -1,17 +1,18 @@
 package il.ac.technion.cs.ssdl.lola.parser;
 
-import il.ac.technion.cs.ssdl.lola.bunnies.ConcreteBunny;
-import il.ac.technion.cs.ssdl.lola.bunnies.GhostKeyword;
-import il.ac.technion.cs.ssdl.lola.bunnies.Keyword;
-import il.ac.technion.cs.ssdl.lola.bunnies.KeywordType;
-import il.ac.technion.cs.ssdl.lola.bunnies.keywords.FindKeywordType;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
+
+import il.ac.technion.cs.ssdl.lola.bunnies.ConcreteBunny;
+import il.ac.technion.cs.ssdl.lola.bunnies.Keyword;
+import il.ac.technion.cs.ssdl.lola.bunnies.KeywordType;
+import il.ac.technion.cs.ssdl.lola.bunnies.keywords.FindKeywordType;
 
 public class ParserTest {
     private static class TestGhostKeyword implements Keyword {

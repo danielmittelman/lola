@@ -1,18 +1,20 @@
 package il.ac.technion.cs.ssdl.lola.parser;
 
-import il.ac.technion.cs.ssdl.lola.bunnies.Bunny;
-import il.ac.technion.cs.ssdl.lola.bunnies.ConcreteBunny;
-import il.ac.technion.cs.ssdl.lola.bunnies.KeywordType;
-import il.ac.technion.cs.ssdl.lola.bunnies.keywords.FindKeywordType;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
+
+import il.ac.technion.cs.ssdl.lola.bunnies.ConcreteBunny;
+import il.ac.technion.cs.ssdl.lola.bunnies.KeywordType;
+import il.ac.technion.cs.ssdl.lola.bunnies.keywords.FindKeywordType;
 
 public class LexerTest {
     private List<KeywordType> keywordTypes;
@@ -44,5 +46,24 @@ public class LexerTest {
         assertEquals(3, b.getColumn());
         assertEquals(" ", l.read().getText());
         assertEquals(null, l.read());
+    }
+    
+    @Test
+    public void testLines() throws IOException, ParseException {
+        Reader stream = new StringReader("first@replace \nthird fourth");
+        Lexer l = new Lexer(stream, keywordTypes);
+        assertEquals("first", l.read().getText());
+        final ConcreteBunny b = l.read();
+        assertEquals("@replace", b.getText());
+        assertEquals(0, b.getLine());
+        assertEquals(5, b.getColumn());
+        assertEquals(" \n", l.read().getText());
+        final ConcreteBunny b2 = l.read();
+        assertEquals("third", b2.getText());
+        assertEquals(1, b2.getLine());
+        assertEquals(0, b2.getColumn());
+        assertEquals(" ", l.read().getText());
+        assertEquals("fourth", l.read().getText());
+
     }
 }

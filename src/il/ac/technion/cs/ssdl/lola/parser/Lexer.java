@@ -59,6 +59,10 @@ public class Lexer {
         }
     }
 
+    public boolean hasMore() throws IOException{
+    	return reader.peek() != -1;
+    }
+    
     private String getIdentifier() throws IOException {
         StringBuilder builder = new StringBuilder();
         for (int i = reader.peek(); i != -1 && isLetter((char) i); i = reader.peek()) {
